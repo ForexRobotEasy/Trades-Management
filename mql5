@@ -1,0 +1,96 @@
+mql5
+//+------------------------------------------------------------------+
+//|                                              Trades Management   |
+//|                                   Developer: forexroboteasy.com   |
+//|                                           Development: Forex Robot Easy Team |
+//+------------------------------------------------------------------+
+
+// Define input parameters
+input double riskPercentage = 2.0; // Risk percentage for each trade
+input double stopLossPercentage = 1.0; // Stop loss percentage for each trade
+
+// Define global variables
+double accountBalance;
+double lotSize;
+
+//+------------------------------------------------------------------+
+//|                        OnInit function                            |
+//|        Function to initialize the Trade Manager software           |
+//+------------------------------------------------------------------+
+void OnInit()
+{
+    // Get the account balance
+    accountBalance = AccountBalance();
+}
+
+//+------------------------------------------------------------------+
+//|                        OnTick function                            |
+//|    Function to execute trades based on the visual trade panel     |
+//+------------------------------------------------------------------+
+void OnTick()
+{
+    // Check if trade panel is active
+    if(IsTradePanelActive())
+    {
+        // Get the selected risk management settings
+        double riskManagementSettings = GetRiskManagementSettings();
+
+        // Calculate the lot size based on risk management settings
+        CalculateLotSize(riskManagementSettings);
+
+        // Check if there is enough available margin to place the trade
+        if(IsMarginAvailable(lotSize))
+        {
+            // Place the trade
+            PlaceTrade(lotSize);
+        }
+    }
+}
+
+//+------------------------------------------------------------------+
+//|             Function to check if the trade panel is active         |
+//+------------------------------------------------------------------+
+bool IsTradePanelActive()
+{
+    // Add code here to check if the trade panel is active
+    return true;
+}
+
+//+------------------------------------------------------------------+
+//|       Function to get the selected risk management settings       |
+//+------------------------------------------------------------------+
+double GetRiskManagementSettings()
+{
+    // Add code here to get the selected risk management settings
+    return riskPercentage;
+}
+
+//+------------------------------------------------------------------+
+//|           Function to calculate the lot size for each trade       |
+//+------------------------------------------------------------------+
+void CalculateLotSize(double riskManagementSettings)
+{
+    // Calculate the lot size based on risk management settings
+    lotSize = (accountBalance * riskManagementSettings) / (100 * stopLossPercentage);
+}
+
+//+------------------------------------------------------------------+
+//|       Function to check if there is enough available margin       |
+//|          to place the trade with the given lot size               |
+//+------------------------------------------------------------------+
+bool IsMarginAvailable(double lotSize)
+{
+    // Add code here to check if there is enough available margin
+    return true;
+}
+
+//+------------------------------------------------------------------+
+//|                Function to place the trade with                   |
+//|                  the given lot size and parameters                |
+//+------------------------------------------------------------------+
+void PlaceTrade(double lotSize)
+{
+    // Add code here to place the trade with the given lot size and parameters
+}
+
+//+------------------------------------------------------------------+
